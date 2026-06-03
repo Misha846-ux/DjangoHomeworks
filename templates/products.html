@@ -1,25 +1,51 @@
-{% load static %}
+{% extends 'layout.html' %}
+{% block title %}Товары{% endblock %}
 
-<div>
-    <h2>Products</h2>
-    <table class="table">
+{% block content %}
+<div class="container mt-3">
+    <h2>Товары</h2>
+    <form method="post" class="mb-4">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-3 mb-2">
+                <input class="form-control" type="text" name="title" placeholder="Название" required>
+            </div>
+            <div class="col-md-3 mb-2">
+                <input class="form-control" type="number" name="price" placeholder="Цена" required>
+            </div>
+            <div class="col-md-3 mb-2">
+                <input class="form-control" type="number" name="quantity" placeholder="Количество" min="0">
+            </div>
+            <div class="col-md-3 mb-2">
+                <input class="form-control" type="text" name="description" placeholder="Описание">
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Добавить товар</button>
+    </form>
+
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">Title</th>
-                <th scope="col">Price</th>
+                <th>Название</th>
+                <th>Цена</th>
+                <th>Количество</th>
+                <th>Описание</th>
             </tr>
         </thead>
-        {% if products %}
-        {% for product in products %}
         <tbody>
+        {% if products %}
+            {% for product in products %}
             <tr>
                 <td>{{ product.title }}</td>
                 <td>{{ product.price }}</td>
+                <td>{{ product.quantity }}</td>
+                <td>{{ product.description }}</td>
             </tr>
-        </tbody>
-        {% endfor %}
+            {% endfor %}
         {% else %}
-        <div>No products available.</div>
+            <tr><td colspan="4">Нет товаров.</td></tr>
         {% endif %}
+        </tbody>
     </table>
 </div>
+{% endblock %}

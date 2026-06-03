@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+{% block title %}Продавцы{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+    <h2>Продавцы</h2>
+    <form method="post" class="mb-4">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-3 mb-2">
+                <input class="form-control" type="text" name="name" placeholder="Имя" required>
+            </div>
+            <div class="col-md-3 mb-2">
+                <input class="form-control" type="text" name="secondName" placeholder="Фамилия" required>
+            </div>
+            <div class="col-md-3 mb-2">
+                <input class="form-control" type="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="col-md-3 mb-2">
+                <input class="form-control" type="tel" name="phoneNumber" placeholder="Телефон">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <select class="form-select" name="role" required>
+                    <option value="seller">Продавец</option>
+                    <option value="primeSeller">Главный продавец</option>
+                    <option value="sales_manager">Керівник відділу продажів</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Добавить продавца</button>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Email</th>
+                <th>Телефон</th>
+                <th>Роль</th>
+                <th>Дата начала</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% if sellers %}
+            {% for seller in sellers %}
+            <tr>
+                <td>{{ seller.name }}</td>
+                <td>{{ seller.secondName }}</td>
+                <td>{{ seller.email }}</td>
+                <td>{{ seller.phoneNumber }}</td>
+                <td>{{ seller.get_role_display }}</td>
+                <td>{{ seller.start_at }}</td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr><td colspan="6">Нет продавцов.</td></tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

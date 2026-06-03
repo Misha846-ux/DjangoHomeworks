@@ -1,0 +1,80 @@
+{% extends 'layout.html' %}
+{% block title %}Продажи{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+    <h2>Продажи</h2>
+    <form method="post" class="mb-4">
+        {% csrf_token %}
+        <div class="row g-2 mb-2">
+            <div class="col-md-3">
+                <label class="form-label">Товар</label>
+                <select class="form-select" name="product" required>
+                    <option value="">Выберите товар</option>
+                    {% for product in products %}
+                    <option value="{{ product.id }}">{{ product.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Покупатель</label>
+                <select class="form-select" name="buyer" required>
+                    <option value="">Выберите покупателя</option>
+                    {% for buyer in buyers %}
+                    <option value="{{ buyer.id }}">{{ buyer.name }} {{ buyer.secondName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Продавец</label>
+                <select class="form-select" name="seller" required>
+                    <option value="">Выберите продавца</option>
+                    {% for seller in sellers %}
+                    <option value="{{ seller.id }}">{{ seller.name }} {{ seller.secondName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Цена</label>
+                <input class="form-control" type="number" name="price" placeholder="Цена" required>
+            </div>
+        </div>
+        <div class="row g-2 mb-3">
+            <div class="col-md-3">
+                <label class="form-label">Количество</label>
+                <input class="form-control" type="number" name="quantity" value="1" min="1">
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Добавить продажу</button>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Дата</th>
+                <th>Товар</th>
+                <th>Покупатель</th>
+                <th>Продавец</th>
+                <th>Цена</th>
+                <th>Количество</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% if sales %}
+            {% for sale in sales %}
+            <tr>
+                <td>{{ sale.created_at }}</td>
+                <td>{{ sale.product.title }}</td>
+                <td>{{ sale.buyer.name }} {{ sale.buyer.secondName }}</td>
+                <td>{{ sale.seller.name }} {{ sale.seller.secondName }}</td>
+                <td>{{ sale.price }}</td>
+                <td>{{ sale.quantity }}</td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr><td colspan="6">Нет продаж.</td></tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

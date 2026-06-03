@@ -1,27 +1,51 @@
-{% load static %}
+{% extends 'layout.html' %}
+{% block title %}Покупатели{% endblock %}
 
-<div>
-    <h2>Buyers</h2>
-    <table class="table">
+{% block content %}
+<div class="container mt-3">
+    <h2>Покупатели</h2>
+    <form method="post" class="mb-4">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-3 mb-2">
+                <input class="form-control" type="text" name="name" placeholder="Имя" required>
+            </div>
+            <div class="col-md-3 mb-2">
+                <input class="form-control" type="text" name="secondName" placeholder="Фамилия" required>
+            </div>
+            <div class="col-md-3 mb-2">
+                <input class="form-control" type="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="col-md-3 mb-2">
+                <input class="form-control" type="tel" name="phoneNumber" placeholder="Телефон">
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Добавить покупателя</button>
+    </form>
+
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Email</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Email</th>
+                <th>Телефон</th>
             </tr>
         </thead>
-        {% if buyers %}
-        {% for buyer in buyers %}
         <tbody>
+        {% if buyers %}
+            {% for buyer in buyers %}
             <tr>
-                <td>{{ buyer.first_name }}</td>
-                <td>{{ buyer.last_name }}</td>
+                <td>{{ buyer.name }}</td>
+                <td>{{ buyer.secondName }}</td>
                 <td>{{ buyer.email }}</td>
+                <td>{{ buyer.phoneNumber }}</td>
             </tr>
-        </tbody>
-        {% endfor %}
+            {% endfor %}
         {% else %}
-        <div>No buyers available.</div>
+            <tr><td colspan="4">Нет покупателей.</td></tr>
         {% endif %}
+        </tbody>
     </table>
 </div>
+{% endblock %}

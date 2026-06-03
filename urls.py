@@ -11,6 +11,8 @@ urlpatterns = [
     path("Random", views.get_random_quote),
     path("products", views.get_products, name = 'products'),
     path("buyers", views.get_Buyers, name = 'buyers'),
+    path("sellers", views.get_sellers, name='sellers'),
+    path("sales", views.get_sales, name='sales'),
     path("Restauran", views.restauranMain),
     path("Reastauran/add/Restauran", views.addRestauran),
     path("Homework7/3", views.homework7_3),

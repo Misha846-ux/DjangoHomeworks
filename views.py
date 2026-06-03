@@ -129,21 +129,84 @@ def get_random_quote(request):
     
     return HttpResponse(random.choice(quotes))
 
+
+###########################################Homework12
 def get_products(request):
     if request.method == 'GET':
         products = Product.objects.all()
         return render(request, "products.html", {"products": products})
     elif request.method == 'POST':
-        body = json.loads(request.body)
         Product.objects.create(
-            title=body.get("title"),
-            price=body.get("price")
+            title=request.POST.get("title", ""),
+            price=int(request.POST.get("price", 0)),
+            description=request.POST.get("description", ""),
+            quantity=int( request.POST.get("quantity", 0))
         )
-        return JsonResponse({"message": "Product created"})
+        return render(request, "products.html", {"products": Product.objects.all()})
+
 
 def get_Buyers(request):
-    buyers = Buyer.objects.all()
-    return render(request, "Buyers.html", {"buyers": buyers})
+    if request.method == 'GET':
+        buyers = Buyer.objects.all()
+        return render(request, "Buyers.html", {"buyers": buyers})
+    elif request.method == 'POST':
+        Buyer.objects.create(
+            name=request.POST.get("name", ""),
+            secondName=request.POST.get("secondName", ""),
+            email=request.POST.get("email", ""),
+            phoneNumber=request.POST.get("phoneNumber", "")
+        )
+        return render(request, "Buyers.html", {"buyers": Buyer.objects.all()})
+
+
+def get_sellers(request):
+    if request.method == 'GET':
+        sellers = Seller.objects.all()
+        return render(request, "Seller.html", {"sellers": sellers})
+    elif request.method == 'POST':
+        Seller.objects.create(
+            name=request.POST.get("name", ""),
+            secondName=request.POST.get("secondName", ""),
+            email=request.POST.get("email", ""),
+            phoneNumber=request.POST.get("phoneNumber", ""),
+            role=request.POST.get("role", "seller")
+        )
+        return render(request, "Seller.html", {"sellers": Seller.objects.all()})
+
+
+def get_sales(request):
+    if request.method == 'GET':
+        sales = SellInfo.objects.select_related("product", "buyer", "seller").all()
+        products = Product.objects.all()
+        buyers = Buyer.objects.all()
+        sellers = Seller.objects.all()
+        return render(request, "SellInfo.html", {
+            "sales": sales,
+            "products": products,
+            "buyers": buyers,
+            "sellers": sellers
+        })
+    if request.method == 'POST':
+        product = Product.objects.get(id=request.POST.get("product"))
+        buyer = Buyer.objects.get(id=request.POST.get("buyer"))
+        seller = Seller.objects.get(id=request.POST.get("seller"))
+        SellInfo.objects.create(
+            product=product,
+            buyer=buyer,
+            seller=seller,
+            price=int(request.POST.get("price", product.price)),
+            quantity=int(request.POST.get("quantity", 1))
+        )
+        sales = SellInfo.objects.select_related("product", "buyer", "seller").all()
+        return render(request, "SellInfo.html", {
+            "sales": sales,
+            "products": Product.objects.all(),
+            "buyers": Buyer.objects.all(),
+            "sellers": Seller.objects.all(),
+            "message": "Sale created"
+        })
+
+    
 
 
 #######################################################Restauran
