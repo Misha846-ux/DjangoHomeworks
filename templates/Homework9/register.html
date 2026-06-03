@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Реєстрація — Інтернет-магазин</title>
+    <style>body{font-family:Arial,Helvetica,sans-serif;margin:2rem;}label{display:block;margin-top:0.8rem;}input,textarea,select{width:100%;max-width:420px;padding:8px;margin-top:4px;}button{margin-top:12px;padding:8px 14px;}</style>
+</head>
+<body>
+    <h1>Форма реєстрації</h1>
+    <form method="post" action="">
+        <label>Ім'я
+            <input type="text" name="first_name" required>
+        </label>
+        <label>Прізвище
+            <input type="text" name="last_name" required>
+        </label>
+        <label>Вік
+            <input type="number" name="age" min="0" max="120" required>
+        </label>
+        <label>Email
+            <input type="email" name="email" required>
+        </label>
+        <label>Стать
+            <select name="gender" required>
+                <option value="">-- оберіть --</option>
+                <option value="Чоловіча">Чоловіча</option>
+                <option value="Жіноча">Жіноча</option>
+                <option value="Інша">Інша</option>
+            </select>
+        </label>
+        <label>Адреса для доставки товару
+            <textarea name="address" rows="3" required></textarea>
+        </label>
+        <label>
+            <input type="checkbox" name="subscribe">
+            Бажаєте підписатися на новини нашого інтернет-магазину?
+        </label>
+        <button type="submit">Відправити</button>
+    </form>
+</body>
+</html>

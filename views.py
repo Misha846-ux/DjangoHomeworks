@@ -41,6 +41,30 @@ def homework8_4(request):
     return render(request, 'Homework8/Spanish.html')
 
 @csrf_exempt
+def homework9_register(request: HttpRequest):
+    if request.method == 'GET':
+        return render(request, 'Homework9/register.html')
+    elif request.method == 'POST':
+        name = request.POST.get('first_name', '')
+        last_name = request.POST.get('last_name', '')
+        age = request.POST.get('age', '')
+        email = request.POST.get('email', '')
+        gender = request.POST.get('gender', '')
+        address = request.POST.get('address', '')
+        subscribe = request.POST.get('subscribe', '')
+
+        data = {
+            'first_name': name,
+            'last_name': last_name,
+            'age': age,
+            'email': email,
+            'gender': gender,
+            'address': address,
+            'subscribe': subscribe,
+        }
+        return render(request, 'Homework9/result.html', data)
+
+@csrf_exempt
 def home(request: HttpRequest):
     if request.method == 'GET':
         posts = ContactInfo.objects.all()

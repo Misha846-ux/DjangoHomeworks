@@ -20,4 +20,5 @@ urlpatterns = [
     path("Homework8/fr", views.homework8_2),
     path("Homework8/de", views.homework8_3),
     path("Homework8/es", views.homework8_4),    
+    path("Homework9", views.homework9_register, name='homework9'),
 ]
