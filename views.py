@@ -27,6 +27,19 @@ def homework7_5(request):
         dayDate = date(date.today().year, date.today().month, date.today().day) + timedelta(days=256)
         return HttpResponse(dayDate)
 
+
+def homework8_1(request):
+    return render(request, 'Homework8/English.html')
+
+def homework8_2(request):
+    return render(request, 'Homework8/France.html')
+
+def homework8_3(request):
+    return render(request, 'Homework8/Deutsche.html')
+
+def homework8_4(request):
+    return render(request, 'Homework8/Spanish.html')
+
 @csrf_exempt
 def home(request: HttpRequest):
     if request.method == 'GET':

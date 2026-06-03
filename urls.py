@@ -16,4 +16,8 @@ urlpatterns = [
     path("Homework7/3", views.homework7_3),
     path("Homework7/4", views.homework7_4),
     path("Homework7/5", views.homework7_5),
+    path("Homework8", views.homework8_1),
+    path("Homework8/fr", views.homework8_2),
+    path("Homework8/de", views.homework8_3),
+    path("Homework8/es", views.homework8_4),    
 ]

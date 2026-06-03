@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework 8 — Song Translation</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; line-height: 1.6; background: #f5f7fb; color: #222; }
+        nav a { margin-right: 1rem; text-decoration: none; color: #0645ad; }
+        nav a:hover { text-decoration: underline; }
+        .translation { margin-top: 1.5rem; padding: 1.2rem; border: 1px solid #dfe3ea; background: #ffffff; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <h1>Homework 8</h1>
+    <nav>
+        <a href="/Homework8">English</a>
+        <a href="/Homework8/fr">Français</a>
+        <a href="/Homework8/de">Deutsch</a>
+        <a href="/Homework8/es">Español</a>
+    </nav>
+    <div class="translation">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
