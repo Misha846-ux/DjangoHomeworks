@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+<div></div>
+<form id="contactForm">
+    <input type="text" name="name" placeholder="Имя" required>
+    <input type="text" name="secondName" placeholder="Фамилия" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="text" name="phoneNumber" placeholder="Номер телефона" required>
+    <textarea name="notes" placeholder="Дополнительная информация"></textarea>
+    <button type="submit">
+        Отправить
+    </button>
+
+</form>
+
+<script src="{% static 'myapp/contact.js' %}"></script>
+
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Мой сайт{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'myapp/style.css' %}" /> 
+    <link rel="stylesheet" href="{% static 'myapp/bootstrap.min.css' %}" /> 
+    <img src="{% static 'myapp/1112228.png' %}" alt="cat" /> 
+</head>
+
+<body>
+
+<div class="card text-center">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="/">Головна</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">Про нас</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contacts">Контакти</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <main>{%block content%}{%endblock%}</main>
+        <p class="card-text">
+          With supporting text below as a natural lead-in to additional content.
+        </p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+
+
+<script src="{% static 'myapp/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+</html>

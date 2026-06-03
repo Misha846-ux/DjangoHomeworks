@@ -1,0 +1,27 @@
+{% load static %}
+
+<div>
+    <h2>Buyers</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+        {% if buyers %}
+        {% for buyer in buyers %}
+        <tbody>
+            <tr>
+                <td>{{ buyer.first_name }}</td>
+                <td>{{ buyer.last_name }}</td>
+                <td>{{ buyer.email }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+        {% else %}
+        <div>No buyers available.</div>
+        {% endif %}
+    </table>
+</div>
